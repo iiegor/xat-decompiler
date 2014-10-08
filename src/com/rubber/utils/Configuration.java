@@ -5,15 +5,17 @@
  */
 package com.rubber.utils;
 
+import com.rubber.Statics;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Iegor
  */
-public class Configuration {
+public class Configuration extends JFrame {
 
     public Properties Configuration;
 
@@ -26,6 +28,7 @@ public class Configuration {
                 fis.close();
             }
         } catch (IOException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, Statics.properties_name.concat(" not found."), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             System.exit(0);
             ex.printStackTrace();
         }

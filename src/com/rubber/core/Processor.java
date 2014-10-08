@@ -10,13 +10,19 @@ import com.rubber.frames.Main;
 import com.rubber.services.CrypoService;
 import com.rubber.utils.Logger;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import javax.swing.JFrame;
 
 /**
- * Credits to RABCDASM
+ * Credits to Nasty35 and rabcdasm
  *
  * @author Iegor
  */
@@ -26,10 +32,36 @@ public class Processor extends Thread {
     private Process p;
     private BufferedReader stdInput;
     private final Main form;
-    
-    public Processor(Main form){
+    private final static String[] injectionPaths = new String[]{
+        "DialogHelp.class.asasm",
+        "network.class.asasm",
+        "basicxavi.class.asasm",
+        "chat.class.asasm",
+        "DialogEdit.class.asasm",
+        "main.class.asasm",
+        "network.class.asasm",
+        "todo.class.asasm",
+        "xatlib.class.asasm",
+        "xconst.class.asasm",
+        "xkiss.class.asasm",
+        "xmessage.class.asasm",
+        "DialogEdit.class.asasm"
+    }, needInjection = new String[]{
+        "http://xat.com/wiki for detailed help.",
+        "xat.com",
+        "xatech.com"
+    }, afterInjection = new String[]{
+        "Cracked by Returns();",
+        Statics.domaincrack,
+        Statics.domaincrack
+    };
+    private final static int maxAttempts = 2;
+    private final static String partName = Statics.fileChoosed.getName().replace(".swf", "-");
+
+    public Processor(Main form) {
         this.form = form;
     }
+
     /**
      * Stages descriptions
      *
@@ -46,7 +78,7 @@ public class Processor extends Thread {
 
             if (p.waitFor() == 0) {
                 if (stage2() == 0) {
-                    stage3();
+                    this.inject(injectionPaths, needInjection, afterInjection);
                 }
             }
         } catch (IOException ex) {
@@ -60,10 +92,10 @@ public class Processor extends Thread {
         try {
             int attempts = 0;
             do {
-                String name = Statics.fileChoosed.getName().replace(".swf", "-") + attempts;
+                String name = partName + attempts;
                 p = Runtime.getRuntime().exec(CrypoService.crypoFolder + "/rabcdasm " + Statics.fileChoosed.getParent() + "\\".concat(name).concat(".abc"));
                 attempts++;
-            } while (attempts != 2);
+            } while (attempts != maxAttempts);
 
             return p.waitFor();
 
@@ -73,37 +105,101 @@ public class Processor extends Thread {
         }
     }
 
-    private void stage3() {
-        String path = Statics.fileChoosed.getParent() + "\\" + Statics.fileChoosed.getName().replace(".swf", "-") + 1 + "\\"; // Path
+    public void inject(String[] paths, String[] oldStrings, String[] newStrings) {
+        final String pathPrefix = Statics.fileChoosed.getParent() + "\\" + partName + 1 + "\\"; // Path
+        ArrayList<String> lines = new ArrayList<String>();
+        String line = null;
 
         try {
-            if(Search.replace(path + "DialogHelp.class.asasm", "http://xat.com/wiki for detailed help.", "Cracked by Returns();")) {
-                Thread.sleep(5000);
-                compile();
+            for (String path : paths) {
+                File f1 = new File(pathPrefix + path);
+                FileReader fr = new FileReader(f1);
+                BufferedReader br = new BufferedReader(fr);
+                while ((line = br.readLine()) != null) {
+                    for (int i = 0; i < oldStrings.length; i++) {
+                        if (line.contains(oldStrings[i])) {
+                            if (!oldStrings[i].equals(oldStrings[1]) || Statics.xmlcrack) {
+                                line = line.replace(oldStrings[i], newStrings[i]);
+                            }
+                        }
+                    }
+                    
+                    /* Structure injection by Nasty35 */
+                    if (path.equals(paths[1]) && line.contains("callproperty        QName(PackageInternalNs(\"\"), \"PickIP\"), 1")) {
+                        lines.add(line);
+ 
+                        for (int a = 0; a < 11; a++) lines.add(br.readLine());
+                        
+                        for(int a = 0; a < 3; a++) br.readLine();
+                        
+                        lines.add("     pushstring        \"" + Statics.portcrack + "\"");
+                        lines.add("     setproperty         QName(PackageNamespace(\"\"), \"useport\")\n");
+                        
+                        br.readLine();
+                        
+                        continue;
+                    } else if(path.equals(paths[1]) && line.contains("QName(PackageNamespace(\"flash.system\"), \"Security\")")) {
+                        for (int a = 0; a < 7; a++) br.readLine();
+                        
+                        continue;
+                    }
+                    
+                    lines.add(line);
+                }
+                fr.close();
+                br.close();
+
+                FileWriter fw = new FileWriter(f1);
+                BufferedWriter out = new BufferedWriter(fw);
+                for (String s : lines) {
+                    out.write(s + "\n");
+                }
+                out.flush();
+                out.close();
+                lines.clear();
+                line = null;
             }
+
+            Thread.sleep(3000); // Wait 3 seconds
+            this.compile(); // Then compile
         } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(form, "Failed when trying to crack the swf file.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            form.finishProcess();
             ex.printStackTrace();
         }
     }
-    
+
     public void compile() {
-        String partName = Statics.fileChoosed.getName().replace(".swf", "-");
-        String part0 = Statics.fileChoosed.getParent() + "\\" + partName + 0 + "\\" + partName + 0;
-        String part1 = Statics.fileChoosed.getParent() + "\\" + partName + 1 + "\\" + partName + 1;
-        
-        try
-        {
-            p = Runtime.getRuntime().exec(CrypoService.crypoFolder + "/rabcasm " + part0 + ".main.asasm");
-            p = Runtime.getRuntime().exec(CrypoService.crypoFolder + "/rabcasm " + part1 + ".main.asasm");
-            
-            if(p.waitFor() == 0) {
-                p = Runtime.getRuntime().exec(CrypoService.crypoFolder + "/abcreplace " + Statics.fileChoosed.getAbsolutePath() + " 0 " + part0 + ".main.abc");
-                p = Runtime.getRuntime().exec(CrypoService.crypoFolder + "/abcreplace " + Statics.fileChoosed.getAbsolutePath() + " 1 " + part1 + ".main.abc");
-                
-                if(p.waitFor() == 0) {
-                    Logger.log(Logger.Level.Info, "The file was compiled successfully!");
-                    form.finishProcess();
+        try {
+            for (int i = 0; i < maxAttempts; i++) {
+                String part = Statics.fileChoosed.getParent() + "\\" + partName + i + "\\" + partName + i;
+
+                p = Runtime.getRuntime().exec(CrypoService.crypoFolder + "/rabcasm " + part + ".main.asasm");
+
+                if (p.waitFor() == 0) {
+                    p = Runtime.getRuntime().exec(CrypoService.crypoFolder + "/abcreplace " + Statics.fileChoosed.getAbsolutePath() + " " + i + " " + part + ".main.abc");
                 }
+            }
+
+            if (p.waitFor() == 0) {
+                Logger.log(Logger.Level.Info, "The file was compiled successfully!");
+                /* CLEAR FILES */
+                for (int i = 0; i < maxAttempts; i++) {
+                    File part = new File(Statics.fileChoosed.getParent().concat("\\").concat(partName + i).concat(".abc"));
+                    if(!Statics.debug) com.rubber.utils.Folder.DeleteFileFolder(Statics.fileChoosed.getParent().concat("\\").concat(partName + i));
+
+                    if (part.exists()) {
+                        part.delete();
+                    }
+                }
+
+                /* SET FINISH STATUS */
+                form.finishProcess();
+            }
+            else
+            {
+                javax.swing.JOptionPane.showMessageDialog(form, "Failed when trying to compile the swf file.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                form.finishProcess();
             }
         } catch (Exception ex) {
             ex.printStackTrace();

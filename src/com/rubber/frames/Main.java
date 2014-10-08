@@ -36,7 +36,15 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
         jDialog1 = new javax.swing.JDialog();
         jFileChooser1 = new javax.swing.JFileChooser();
         jDialog2 = new javax.swing.JDialog();
+        jSeparator2 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jDialog3 = new javax.swing.JDialog();
+        jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -51,8 +59,9 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Shockwave Flash", "swf");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("SWF", "swf");
         jFileChooser1.setAcceptAllFileFilterUsed(false);
         jFileChooser1.setFileFilter(filter);
         jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
@@ -82,23 +91,76 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jLabel3.setText("About content test!");
+        jLabel3.setText("Changelog for the actual version:");
+
+        jLabel5.setText("v" + Statics.Version);
+
+        jLabel6.setText("- Added the new visual interface.");
+
+        jLabel7.setText("- Search string function optimized.");
+
+        jLabel8.setText("- Added new options for crack.");
+
+        jLabel10.setText("- Added support for future versions.");
 
         javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
         jDialog2.getContentPane().setLayout(jDialog2Layout);
         jDialog2Layout.setHorizontalGroup(
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog2Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jLabel3)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2)
+                    .addGroup(jDialog2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                        .addComponent(jLabel5))
+                    .addGroup(jDialog2Layout.createSequentialGroup()
+                        .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jDialog2Layout.setVerticalGroup(
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel3)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel6)
+                .addGap(6, 6, 6)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel9.setText("This tool was developed by Returns(); with the help of Nasty35.");
+
+        javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
+        jDialog3.getContentPane().setLayout(jDialog3Layout);
+        jDialog3Layout.setHorizontalGroup(
+            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jDialog3Layout.setVerticalGroup(
+            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,7 +168,7 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
 
         jLabel1.setText("Website:");
 
-        jTextField1.setText("example.com");
+        jTextField1.setText(Statics.domaincrack);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -115,7 +177,7 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
 
         jLabel2.setText("Port:");
 
-        jTextField2.setText("1234");
+        jTextField2.setText(Statics.portcrack);
 
         jLabel4.setText("Do you want to disable the xmlsocket policy security?");
 
@@ -156,13 +218,21 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
 
         jMenu2.setText("Help");
 
-        jMenuItem2.setText("About...");
+        jMenuItem2.setText("Changelog...");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem2);
+
+        jMenuItem4.setText("Credits...");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
 
@@ -235,13 +305,16 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
             jButton1.setText("Please wait, this can take a while...");
             jButton1.setEnabled(false);
             jMenuItem3.setEnabled(false); //Disable the open file option
+            if(jCheckBox1.isSelected()) Statics.xmlcrack = true;
+            Statics.domaincrack = jTextField1.getText();
+            Statics.portcrack = jTextField2.getText();
             Env.getManager().getThreads().executeOthers(new com.rubber.core.Processor(this));
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        com.rubber.utils.Prettify.Dialog(jDialog2, "About", false);
+        com.rubber.utils.Prettify.Dialog(jDialog2, "Changelog", false);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -266,6 +339,11 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
                 break;
         }
     }//GEN-LAST:event_jFileChooser1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        com.rubber.utils.Prettify.Dialog(jDialog3, "Credits", false);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     public void finishProcess() {
         jButton1.setEnabled(true);
@@ -307,18 +385,27 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
+    private javax.swing.JDialog jDialog3;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables

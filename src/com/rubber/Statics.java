@@ -14,8 +14,15 @@ import java.io.File;
  */
 public final class Statics {
     public final static String properties_name = "config.properties";
-    public final static boolean debug = false;
-    public static boolean autoupdate = false;
     public final static String author = "Returns();";
+    public static String domaincrack = "example.com";
+    public static String portcrack = "1234";
+    
+    public final static boolean debug = true;
+    public static boolean xmlcrack = false;
+    public static boolean autoupdate = false;
+    
     public static File fileChoosed = null;
+    
+    public static final double Version = 0.2;
 }

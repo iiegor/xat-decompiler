@@ -23,8 +23,8 @@ public class QueueService extends Thread {
         this.HashMap = new HashMap<>();
 
         this.HashMap.put(1, new UpdateService());
-        this.HashMap.put(2, new LicenseService());
-        this.HashMap.put(3, new CrypoService());
+        this.HashMap.put(2, new CrypoService());
+        this.HashMap.put(3, new EnvironmentService());
     }
 
     public HashMap<Integer, IServiceEvent> getQueue() {

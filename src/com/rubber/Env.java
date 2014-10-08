@@ -8,7 +8,9 @@ package com.rubber;
 /**
  * Created with Rubber, a simple manager for frames and services for java developed by Iegor.
  * 
- * @author Iegor / Returns();
+ * @author Returns();
+ * @twitter iiegor
+ * @skype iegor3
  */
 public final class Env {
     public static Manager Manager;
