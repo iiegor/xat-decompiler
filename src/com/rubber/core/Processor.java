@@ -16,10 +16,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
-import javax.swing.JFrame;
 
 /**
  * Credits to Nasty35 and rabcdasm
@@ -32,7 +32,7 @@ public class Processor extends Thread {
     private Process p;
     private BufferedReader stdInput;
     private final Main form;
-    private final static String[] injectionPaths = new String[]{
+    private final String[] injectionPaths = new String[]{
         "DialogHelp.class.asasm",
         "network.class.asasm",
         "basicxavi.class.asasm",
@@ -160,13 +160,28 @@ public class Processor extends Thread {
                 line = null;
             }
 
-            Thread.sleep(3000); // Wait 3 seconds
-            this.compile(); // Then compile
+            this.advancedInjection(); // Next
         } catch (Exception ex) {
             javax.swing.JOptionPane.showMessageDialog(form, "Failed when trying to crack the swf file.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             form.finishProcess();
             ex.printStackTrace();
         }
+    }
+    
+    public void advancedInjection() {
+        if(Statics.advancedCrack) {
+            Statics.advancedCrackFilesArr.stream().forEach((filePath) -> {
+                try
+                {
+                    Files.copy(Paths.get(filePath.toString()), Paths.get(Statics.fileChoosed.getParent() + "\\" + partName + 1 + "\\" + filePath.getName()), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                    this.compile();
+                } catch(IOException ex) {
+                    javax.swing.JOptionPane.showMessageDialog(form, "Failed when trying to inject custom components.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    form.finishProcess();
+                    ex.printStackTrace();
+                }
+            });
+        } else this.compile();
     }
 
     public void compile() {

@@ -8,6 +8,7 @@ package com.rubber.frames;
 import com.rubber.Env;
 import com.rubber.Statics;
 import java.awt.Frame;
+import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -166,7 +167,7 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        FileNameExtensionFilter filter2 = new FileNameExtensionFilter("SWF", "swf");
+        FileNameExtensionFilter filter2 = new FileNameExtensionFilter("ASASM", "asasm");
         jFileChooser2.setAcceptAllFileFilterUsed(false);
         jFileChooser2.setFileFilter(filter2);
         jFileChooser2.addActionListener(new java.awt.event.ActionListener() {
@@ -283,6 +284,7 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
         });
 
         jButton2.setText("Add custom component");
+        jButton2.setEnabled(jCheckBox2.isSelected());
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -414,7 +416,8 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
             jButton1.setText("Please wait, this can take a while...");
             jButton1.setEnabled(false);
             jMenuItem3.setEnabled(false); //Disable the open file option
-            if(jCheckBox1.isSelected()) Statics.xmlcrack = true;
+            Statics.xmlcrack = jCheckBox1.isSelected();
+            Statics.advancedCrack = jCheckBox2.isSelected();
             Statics.domaincrack = jTextField1.getText();
             Statics.portcrack = jTextField2.getText();
             Env.getManager().getThreads().executeOthers(new com.rubber.core.Processor(this));
@@ -456,25 +459,32 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        com.rubber.utils.Prettify.Dialog(jDialog4, "Select the file with the name of the component to replace.", false);
+        if(!jCheckBox2.isSelected()) {
+            javax.swing.JOptionPane.showMessageDialog(jDialog4, "Please, enable the advanced injection checkbox to add custom components!", "Information", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        com.rubber.utils.Prettify.Dialog(jDialog4, "Select the file with the name of the component you want to replace.", false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jFileChooser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser2ActionPerformed
         // TODO add your handling code here:
-        if(!Statics.advancedCrack) return;
-                
         JFileChooser fileChooser = (JFileChooser) evt.getSource();
         String command = evt.getActionCommand();
 
         switch (command) {
             case JFileChooser.APPROVE_SELECTION:
                 if(Statics.advancedCrackFilesArr.contains(fileChooser.getSelectedFile())) {
-                    javax.swing.JOptionPane.showMessageDialog(jDialog4, "The file you want to add is already added, selected other!", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+                    javax.swing.JOptionPane.showMessageDialog(jDialog4, "The file you want to add is already added, select other!", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
                     break;
                 }
                 
                 Statics.advancedCrackFilesArr.add(fileChooser.getSelectedFile());
-                System.out.println(Statics.advancedCrackFilesArr);
+                jTextArea1.setText("");
+                
+                Statics.advancedCrackFilesArr.stream().forEach((fileName) -> {
+                    jTextArea1.append(fileName.toString().concat("\n"));
+                });
 
                 jDialog4.dispose();
                 break;
@@ -487,7 +497,7 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
         // TODO add your handling code here:
-        Statics.advancedCrack = true;
+        jButton2.setEnabled(jCheckBox2.isSelected());
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     public void finishProcess() {

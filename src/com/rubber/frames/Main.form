@@ -179,7 +179,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFileChooser2ActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="FileNameExtensionFilter filter2 = new FileNameExtensionFilter(&quot;SWF&quot;, &quot;swf&quot;);&#xa;jFileChooser2.setAcceptAllFileFilterUsed(false);&#xa;jFileChooser2.setFileFilter(filter2);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="FileNameExtensionFilter filter2 = new FileNameExtensionFilter(&quot;ASASM&quot;, &quot;asasm&quot;);&#xa;jFileChooser2.setAcceptAllFileFilterUsed(false);&#xa;jFileChooser2.setFileFilter(filter2);"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -482,6 +482,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jButton2.setEnabled(jCheckBox2.isSelected());"/>
+              </AuxValues>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
               <AuxValues>
