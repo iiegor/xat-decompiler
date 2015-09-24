@@ -1,4 +1,5 @@
 # xat-decompiler
+> A cross-platform swf decompiler
 
 ## TODO
 - Improve the accuracy of the string injection
