@@ -8,6 +8,7 @@ package com.rubber.services;
 import com.rubber.utils.Logger;
 import java.io.File;
 import javax.swing.JFrame;
+import com.rubber.Statics;
 
 /**
  *
@@ -20,8 +21,9 @@ public class CrypoService extends JFrame implements IServiceEvent {
     public boolean exists() {
         Logger.log(Logger.Level.Debug, "Searching for ".concat(crypoFolder).concat("folder..."));
 
-        File f = new File(crypoFolder);
-        return f.exists();
+        File file = Statics.debug ? new File("third_party/RABCDAsm") : new File(crypoFolder);
+     
+        return file.exists();
     }
 
     @Override
