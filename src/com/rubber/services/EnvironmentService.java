@@ -17,6 +17,6 @@ public class EnvironmentService extends JFrame implements IServiceEvent {
     
     @Override
     public void invoke() {
-        if(Utils.isUnix() || Utils.isMac()) javax.swing.JOptionPane.showMessageDialog(this, "The unix / mac version already still in development.\nIf you continue with the execution of this program will be your responsability.", "Notice", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        if(Utils.isUnix() || Utils.isMac()) javax.swing.JOptionPane.showMessageDialog(this, "The linux and mac versions of this program are in a experimental phase.\nIf you continue with the execution of this program will be your responsability.", "Notice", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }
 }
