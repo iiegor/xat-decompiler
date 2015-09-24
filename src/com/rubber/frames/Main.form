@@ -106,17 +106,17 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="- Added new options for crack."/>
+            <Property name="text" type="java.lang.String" value="- Injection accuracy improved."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
-            <Property name="text" type="java.lang.String" value="- Advanced crack option implementation."/>
+            <Property name="text" type="java.lang.String" value="- Patched for the latest versions."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="- Update service fixed."/>
+            <Property name="text" type="java.lang.String" value="- Some errors fixed."/>
           </Properties>
         </Component>
       </SubComponents>

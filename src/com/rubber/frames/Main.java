@@ -99,11 +99,11 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
 
         jLabel5.setText("v" + Statics.Version);
 
-        jLabel6.setText("- Added new options for crack.");
+        jLabel6.setText("- Injection accuracy improved.");
 
-        jLabel7.setText("- Advanced crack option implementation.");
+        jLabel7.setText("- Patched for the latest versions.");
 
-        jLabel8.setText("- Update service fixed.");
+        jLabel8.setText("- Some errors fixed.");
 
         javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
         jDialog2.getContentPane().setLayout(jDialog2Layout);
