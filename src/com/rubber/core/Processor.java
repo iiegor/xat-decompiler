@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rubber.core;
 
 import com.rubber.Statics;
@@ -22,9 +17,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 /**
- * Credits to Nasty35 and rabcdasm
- *
- * @author Iegor
+ * @author Iegor, Nasty35
  */
 public class Processor extends Thread {
 
