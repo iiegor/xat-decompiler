@@ -21,7 +21,7 @@ public final class Env {
                     + "\\_| \\_\\__,_|_.__/|_.__/ \\___|_|   \n");
             System.out.println(sBuilder.toString());
         }
-        if(Statics.debug) Thread.sleep(1000); // Set timeout
+        if(Statics.DEBUG) Thread.sleep(1000); // Set timeout
         
         Manager = new Manager();
         Env.getManager().getFrameManager().getFrames().get("loader").invoke();

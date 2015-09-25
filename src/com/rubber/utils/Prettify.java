@@ -7,7 +7,7 @@ import javax.swing.JDialog;
  *
  * @author Iegor
  */
-public class Prettify {
+final public class Prettify {
     public static void Windows(Frame form, String title, boolean isResizable) {
         form.setTitle(title);
         form.setLocationRelativeTo(null);

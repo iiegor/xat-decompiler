@@ -2,7 +2,6 @@ package com.rubber.core;
 
 import com.rubber.Statics;
 import com.rubber.frames.Main;
-import com.rubber.services.CrypoService;
 import com.rubber.utils.Logger;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,32 +18,30 @@ import java.util.logging.Level;
 /**
  * @author Iegor, Nasty35
  */
-public class Processor extends Thread {
+final public class Processor extends Thread {
 
     public String message;
     private Process p;
     private BufferedReader stdInput;
     private final Main form;
     private final String[] injectionPaths = new String[]{
-        "DialogHelp.class.asasm",
         "network.class.asasm",
-        "basicxavi.class.asasm",
-        "chat.class.asasm",
-        "DialogEdit.class.asasm",
         "main.class.asasm",
-        "network.class.asasm",
+        "chat.class.asasm",
+        "basicxavi.class.asasm",
         "todo.class.asasm",
-        "xatlib.class.asasm",
         "xconst.class.asasm",
+        "xatlib.class.asasm",
         "xkiss.class.asasm",
         "xmessage.class.asasm",
+        "DialogHelp.class.asasm",
         "DialogEdit.class.asasm"
     }, needInjection = new String[]{
         "http://xat.com/wiki for detailed help.",
         "xat.com",
         "xatech.com"
     }, afterInjection = new String[]{
-        "Cracked by Returns();",
+        "Decompiled with http://github.com/iiegor/xat-decompiler",
         Statics.domaincrack,
         Statics.domaincrack
     };
@@ -66,7 +63,7 @@ public class Processor extends Thread {
     @Override
     public void run() {
         try {
-            p = Runtime.getRuntime().exec(CrypoService.crypoFolder + "/abcexport ".concat(Statics.fileChoosed.getAbsolutePath()));
+            p = Runtime.getRuntime().exec(Statics.crypoFolder + "/abcexport ".concat(Statics.fileChoosed.getAbsolutePath()));
             stdInput = new BufferedReader(new InputStreamReader(p.getInputStream())); // Reader por input
 
             if (p.waitFor() == 0) {
@@ -86,7 +83,7 @@ public class Processor extends Thread {
             int attempts = 0;
             do {
                 String name = partName + attempts;
-                p = Runtime.getRuntime().exec(CrypoService.crypoFolder + "/rabcdasm " + Statics.fileChoosed.getParent() + "\\".concat(name).concat(".abc"));
+                p = Runtime.getRuntime().exec(Statics.crypoFolder + "/rabcdasm " + Statics.fileChoosed.getParent() + "\\".concat(name).concat(".abc"));
                 attempts++;
             } while (attempts != maxAttempts);
 
@@ -111,27 +108,25 @@ public class Processor extends Thread {
                 while ((line = br.readLine()) != null) {
                     for (int i = 0; i < oldStrings.length; i++) {
                         if (line.contains(oldStrings[i])) {
-                            if (!oldStrings[i].equals(oldStrings[1]) || Statics.xmlcrack) {
-                                line = line.replace(oldStrings[i], newStrings[i]);
-                            }
+                            line = line.replace(oldStrings[i], newStrings[i]);
                         }
                     }
                     
                     /* Structure injection by Nasty35 */
-                    if (path.equals(paths[1]) && line.contains("callproperty        QName(PackageInternalNs(\"\"), \"PickIP\"), 1")) {
+                    if (path.equals(paths[0]) && line.contains("callproperty        QName(PackageInternalNs(\"\"), \"PickIP\"), 1")) {
                         lines.add(line);
  
                         for (int a = 0; a < 11; a++) lines.add(br.readLine());
                         
-                        for(int a = 0; a < 3; a++) br.readLine();
+                        for(int a = 0; a < 5; a++) br.readLine();
                         
-                        lines.add("     pushstring        \"" + Statics.portcrack + "\"");
+                        lines.add("     pushstring          \"" + Statics.portcrack + "\"");
                         lines.add("     setproperty         QName(PackageNamespace(\"\"), \"useport\")\n");
                         
                         br.readLine();
                         
                         continue;
-                    } else if(path.equals(paths[1]) && line.contains("QName(PackageNamespace(\"flash.system\"), \"Security\")")) {
+                    } else if(path.equals(paths[0]) && line.contains("QName(PackageNamespace(\"flash.system\"), \"Security\")") && Statics.xmlcrack) {
                         for (int a = 0; a < 7; a++) br.readLine();
                         
                         continue;
@@ -182,10 +177,10 @@ public class Processor extends Thread {
             for (int i = 0; i < maxAttempts; i++) {
                 String part = Statics.fileChoosed.getParent() + "\\" + partName + i + "\\" + partName + i;
 
-                p = Runtime.getRuntime().exec(CrypoService.crypoFolder + "/rabcasm " + part + ".main.asasm");
+                p = Runtime.getRuntime().exec(Statics.crypoFolder + "/rabcasm " + part + ".main.asasm");
 
                 if (p.waitFor() == 0) {
-                    p = Runtime.getRuntime().exec(CrypoService.crypoFolder + "/abcreplace " + Statics.fileChoosed.getAbsolutePath() + " " + i + " " + part + ".main.abc");
+                    p = Runtime.getRuntime().exec(Statics.crypoFolder + "/abcreplace " + Statics.fileChoosed.getAbsolutePath() + " " + i + " " + part + ".main.abc");
                 }
             }
 
@@ -194,7 +189,7 @@ public class Processor extends Thread {
                 /* CLEAR FILES */
                 for (int i = 0; i < maxAttempts; i++) {
                     File part = new File(Statics.fileChoosed.getParent().concat("\\").concat(partName + i).concat(".abc"));
-                    if(!Statics.debug) com.rubber.utils.Folder.DeleteFileFolder(Statics.fileChoosed.getParent().concat("\\").concat(partName + i));
+                    if(!Statics.DEBUG) com.rubber.utils.Folder.DeleteFileFolder(Statics.fileChoosed.getParent().concat("\\").concat(partName + i));
 
                     if (part.exists()) {
                         part.delete();

@@ -60,7 +60,7 @@ public class Loader implements IFrameEvent {
 
         // If debug, wait and then execute
         try {
-            if (Statics.debug) {
+            if (Statics.DEBUG) {
 
                 Thread.sleep(1000);
 

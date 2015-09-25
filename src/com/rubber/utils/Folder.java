@@ -6,7 +6,7 @@ import java.io.File;
  *
  * @author Iegor
  */
-public class Folder {
+final public class Folder {
 
     public static void DeleteFileFolder(String path) {
 

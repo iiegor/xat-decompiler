@@ -4,7 +4,7 @@ package com.rubber.utils;
  *
  * @author Iegor
  */
-public class Logger {
+final public class Logger {
     public static enum Level {
         Info,
         Debug,

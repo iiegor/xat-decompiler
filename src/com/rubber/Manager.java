@@ -15,7 +15,7 @@ public class Manager {
     public ThreadPoolManager ThreadPoolManager;
     
     public Manager() throws Exception {
-        this.Configuration = new Configuration(Statics.properties_name);
+        this.Configuration = new Configuration("config.properties");
         this.FrameManager = new FrameManager();
         this.ThreadPoolManager = new ThreadPoolManager();
     }

@@ -10,7 +10,7 @@ import javax.swing.JFrame;
  *
  * @author Iegor
  */
-public class Configuration extends JFrame {
+final public class Configuration extends JFrame {
 
     public Properties Configuration;
 
@@ -23,7 +23,7 @@ public class Configuration extends JFrame {
                 fis.close();
             }
         } catch (IOException ex) {
-            javax.swing.JOptionPane.showMessageDialog(this, Statics.properties_name.concat(" not found."), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Configuration file (".concat(file).concat(") not found."), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             System.exit(0);
             ex.printStackTrace();
         }

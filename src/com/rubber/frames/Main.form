@@ -100,7 +100,7 @@
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;v&quot; + Statics.Version" type="code"/>
+              <Connection code="&quot;v&quot; + Statics.VERSION" type="code"/>
             </Property>
           </Properties>
         </Component>
@@ -146,8 +146,13 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
-            <Property name="text" type="java.lang.String" value="This tool was developed by Returns(); with the help of Nasty35."/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;This tool was developed by &quot;.concat(Statics.AUTHOR).concat(&quot; with the help of Nasty35.&quot;)" type="code"/>
+            </Property>
           </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+          </AccessibilityProperties>
         </Component>
       </SubComponents>
     </Container>
@@ -393,7 +398,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Website:"/>
+                <Property name="text" type="java.lang.String" value="Domain:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">

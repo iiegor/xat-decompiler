@@ -97,7 +97,7 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
 
         jLabel3.setText("Changelog for the actual version:");
 
-        jLabel5.setText("v" + Statics.Version);
+        jLabel5.setText("v" + Statics.VERSION);
 
         jLabel6.setText("- Injection accuracy improved.");
 
@@ -143,7 +143,7 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel9.setText("This tool was developed by Returns(); with the help of Nasty35.");
+        jLabel9.setText("This tool was developed by ".concat(Statics.AUTHOR).concat(" with the help of Nasty35."));
 
         javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
         jDialog3.getContentPane().setLayout(jDialog3Layout);
@@ -161,6 +161,8 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
                 .addComponent(jLabel9)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jLabel9.getAccessibleContext().setAccessibleName("");
 
         FileNameExtensionFilter filter2 = new FileNameExtensionFilter("ASASM", "asasm");
         jFileChooser2.setAcceptAllFileFilterUsed(false);
@@ -211,7 +213,7 @@ public class Main extends javax.swing.JFrame implements IFrameEvent {
             }
         });
 
-        jLabel1.setText("Website:");
+        jLabel1.setText("Domain:");
 
         jLabel4.setText("Do you want to disable the xmlsocket policy security?");
 
