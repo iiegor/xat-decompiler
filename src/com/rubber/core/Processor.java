@@ -35,9 +35,10 @@ final public class Processor extends Thread {
         "xkiss.class.asasm",
         "xmessage.class.asasm",
         "DialogHelp.class.asasm",
-        "DialogEdit.class.asasm"
+        "DialogEdit.class.asasm",
+        "loadbitmap.class.asasm"
     }, needInjection = new String[]{
-        "http://xat.com/wiki for detailed help.",
+        "xat.com/wiki for detailed help.",
         "xat.com",
         "xatech.com"
     }, afterInjection = new String[]{
@@ -126,10 +127,18 @@ final public class Processor extends Thread {
                         br.readLine();
                         
                         continue;
-                    } else if(path.equals(paths[0]) && line.contains("QName(PackageNamespace(\"flash.system\"), \"Security\")") && Statics.xmlcrack) {
+                    } else if (path.equals(paths[0]) && line.contains("QName(PackageNamespace(\"flash.system\"), \"Security\")") && Statics.xmlcrack) {
                         for (int a = 0; a < 7; a++) br.readLine();
                         
                         continue;
+                    } else if (path.equals("loadbitmap.class.asasm") && line.contains("    pushstring          \"xat\"")) {
+                        br.readLine();
+                        br.readLine();
+                        
+                        String[] domain = Statics.domaincrack.split("\\.");
+                        
+                        lines.add(String.format("    pushstring          \"%s\"", domain[0]));
+                        lines.add(String.format("    pushstring          \"%s\"\n", domain[1]));
                     }
                     
                     lines.add(line);
